@@ -1,0 +1,149 @@
+task_packet_version: "1.1"
+
+task:
+  task_id: "M1-T01"
+  feature_id: "F-MOVE-001"
+  milestone_id: "M1"
+  title: "Implement player horizontal movement"
+  milestone: "M1_vertical_slice"
+  priority: "high" # low | medium | high | critical
+  owner_role: "coder" # planner | coder | validator | integrator | reflector | documenter
+  requested_by: "planner"
+  engine_version: "4.5"
+  risk_tier: "medium" # low | medium | high
+  blast_radius: "local" # local | subsystem | systemic
+  requires_manual_review: false
+  max_files_changed: 2
+  max_lines_changed: 120
+  depends_on_task_ids: []
+  depends_on_contract_ids:
+    - "CONTRACT-API-INPUT-001"
+
+scope:
+  objective: >
+    Add left/right movement for Player using InputMap actions and CharacterBody2D velocity.
+  non_objectives:
+    - "No animation blending changes"
+    - "No UI changes"
+    - "No save/load changes"
+
+files:
+  allowed_edit:
+    - "res://ai_library/systems/movement/player_move_2d.gd"
+    - "res://scenes/player/player.tscn"
+  allowed_file_globs:
+    - "res://ai_library/systems/movement/*.gd"
+    - "res://scenes/player/*.tscn"
+  forbidden_edit:
+    - "res://ai_library/systems/core/game_state.gd"
+  forbidden_file_globs:
+    - "res://ai_library/systems/ui/**"
+
+dependencies:
+  required_input_actions:
+    - "move_left"
+    - "move_right"
+  required_scene_contracts:
+    - "SCENE-PLAYER-001"
+  required_docs:
+    - "res://ai_library/docs/style_guide.md"
+    - "res://ai_library/docs/api_contracts.md"
+    - "res://ai_library/docs/scene_contracts.md"
+    - "res://ai_library/docs/failure_patterns.md"
+  required_pattern_ids:
+    - "PATTERN-MOVE-2D-AXIS-001"
+
+retrieval:
+  must_retrieve_before_coding:
+    - "movement/player_move_2d equivalent pattern"
+    - "InputMap usage examples"
+    - "CharacterBody2D motion contract"
+  evidence_pack_id: "EVIDENCE-M1-T01"
+  retrieved_references: [] # fill at runtime
+
+implementation_constraints:
+  - "Use Input.get_axis for horizontal movement"
+  - "Update velocity in _physics_process"
+  - "Call move_and_slide() exactly once per physics tick"
+  - "Minimal patch only"
+
+assumptions:
+  - "Player node already has CollisionShape2D"
+  - "InputMap contains move_left/move_right"
+
+risk_notes:
+  - "Potential regression in jump behavior if velocity handling changes."
+
+acceptance_checks:
+  automated_required:
+    - id: "AC-01"
+      test_id: "TEST-MOVE-LEFT-001"
+      name: "Moves left when move_left pressed"
+      type: "scripted_check"
+      expected: "Player x position decreases while pressed"
+    - id: "AC-02"
+      test_id: "TEST-MOVE-RIGHT-001"
+      name: "Moves right when move_right pressed"
+      type: "scripted_check"
+      expected: "Player x position increases while pressed"
+  manual_required:
+    - id: "AC-03"
+      test_id: "TEST-MOVE-IDLE-001"
+      name: "No movement when no directional input"
+      type: "manual_playtest"
+      expected: "Velocity.x approaches 0"
+
+regression_checks:
+  automated_required:
+    - id: "RC-01"
+      test_id: "TEST-STARTUP-001"
+      name: "Scene starts without node errors"
+      type: "startup_check"
+      expected: "No missing node errors in output"
+  manual_required:
+    - id: "RC-02"
+      test_id: "TEST-JUMP-REG-001"
+      name: "Existing jump behavior unaffected"
+      type: "manual_playtest"
+      expected: "Jump still triggers as before"
+
+dod:
+  task:
+    - "Feature works"
+    - "Automated required checks pass"
+    - "Regression check executed"
+    - "Docs/memory updated"
+  milestone:
+    - "Vertical slice composes end-to-end"
+    - "No Sev1 defects open"
+  product:
+    - "MVP playable loop confirmed"
+    - "Performance thresholds met"
+    - "Content minimum met"
+
+dod_checks:
+  - "task_acceptance_all_pass"
+  - "regression_check_executed"
+  - "memory_entry_appended"
+
+verification_notes:
+  plan_note: "Patch touches only movement + player scene scope."
+  risk_note: "No contract signature changes expected."
+  verification_note: "Automated checks run before manual gate."
+
+rollback_plan:
+  strategy: "Revert player_move_2d.gd and player.tscn changes"
+  trigger_conditions:
+    - "Any regression check fails"
+    - "New runtime errors appear in startup"
+
+deliverables:
+  - "Patch summary"
+  - "Files changed list"
+  - "Acceptance check results"
+  - "Memory log entry"
+
+handoff:
+  next_role: "validator"
+  notes_for_next_role: >
+    Verify physics loop usage and confirm no delta misuse with move_and_slide.

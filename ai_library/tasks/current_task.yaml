@@ -1,0 +1,133 @@
+task_packet_version: "1.0"
+
+task:
+  task_id: "M1-T02"
+  feature_id: "F-MOVE-002"
+  milestone_id: "M1"
+  title: "Stabilize jump apex consistency"
+  milestone: "M1_vertical_slice"
+  priority: "high"
+  owner_role: "validator"
+  requested_by: "planner"
+  engine_version: "4.5"
+  risk_tier: "medium"
+  blast_radius: "subsystem"
+  requires_manual_review: true
+  max_files_changed: 2
+  max_lines_changed: 80
+  depends_on_task_ids:
+    - "M1-T01"
+  depends_on_contract_ids:
+    - "CONTRACT-API-INPUT-001"
+
+scope:
+  objective: >
+    Ensure jump apex remains consistent while preserving existing movement behavior.
+  non_objectives:
+    - "No UI changes"
+    - "No unrelated combat refactors"
+
+files:
+  allowed_edit:
+    - "res://ai_library/systems/movement/player_move_2d.gd"
+  allowed_file_globs:
+    - "res://ai_library/systems/movement/*.gd"
+  forbidden_edit:
+    - "res://ai_library/systems/core/game_state.gd"
+  forbidden_file_globs:
+    - "res://ai_library/systems/ui/**"
+
+dependencies:
+  required_input_actions:
+    - "jump"
+  required_scene_contracts:
+    - "SCENE-PLAYER-001"
+  required_docs:
+    - "res://ai_library/docs/style_guide.md"
+    - "res://ai_library/docs/api_contracts.md"
+    - "res://ai_library/docs/scene_contracts.md"
+  required_pattern_ids:
+    - "PATTERN-MOVE-2D-JUMP-001"
+
+retrieval:
+  must_retrieve_before_coding:
+    - "jump handling pattern"
+    - "physics loop contract"
+  retrieved_references: []
+  evidence_pack_id: "EVIDENCE-M1-T02"
+
+implementation_constraints:
+  - "Keep movement in _physics_process"
+  - "No velocity*delta before move_and_slide"
+  - "Minimal patch only"
+
+assumptions:
+  - "InputMap contains jump"
+  - "Player scene contract unchanged"
+
+risk_notes:
+  - "Behavior coupling with horizontal movement and gravity tuning."
+
+acceptance_checks:
+  automated_required:
+    - id: "AC-01"
+      test_id: "TEST-JUMP-TRIGGER-001"
+      name: "Jump action triggers vertical impulse"
+      type: "scripted_check"
+      expected: "Velocity.y receives jump impulse on press"
+  manual_required:
+    - id: "AC-02"
+      test_id: "TEST-JUMP-APEX-001"
+      name: "Apex consistency"
+      type: "manual_playtest"
+      expected: "Apex variation remains within acceptable threshold"
+
+regression_checks:
+  automated_required:
+    - id: "RC-01"
+      test_id: "TEST-STARTUP-001"
+      name: "Startup sanity"
+      type: "startup_check"
+      expected: "No missing-node/runtime errors"
+  manual_required:
+    - id: "RC-02"
+      test_id: "TEST-MOVE-HORIZ-001"
+      name: "Horizontal movement unaffected"
+      type: "manual_playtest"
+      expected: "Left/right movement remains unchanged"
+
+dod:
+  task:
+    - "Acceptance checks pass"
+    - "At least one regression check executed"
+    - "Memory entry appended"
+  milestone:
+    - "Vertical slice remains playable"
+  product:
+    - "No sev1 regressions introduced"
+
+dod_checks:
+  - "task_acceptance_all_pass"
+  - "regression_check_executed"
+  - "memory_entry_appended"
+
+verification_notes:
+  plan_note: "Validate physics-only update path for jump consistency."
+  risk_note: "Potential nondeterminism if mixed process loops remain."
+  verification_note: "Run startup + jump behavior checks before merge."
+
+rollback_plan:
+  strategy: "Revert movement script changes"
+  trigger_conditions:
+    - "Regression checks fail"
+    - "New runtime errors appear"
+
+deliverables:
+  - "Patch summary"
+  - "Acceptance and regression outcomes"
+  - "Memory log update"
+
+handoff:
+  next_role: "integrator"
+  notes_for_next_role: >
+    Confirm failure tag assignment and calibrated confidence update before merge.

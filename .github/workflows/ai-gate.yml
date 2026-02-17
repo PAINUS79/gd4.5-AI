@@ -1,0 +1,41 @@
+name: AI Gate
+
+on:
+  pull_request:
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  ai-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node deps
+        run: npm ci
+
+      - name: Validate wrapper entrypoints
+        run: npm run wrappers:check
+
+      - name: Lint artifacts manifest
+        run: npm run manifest:lint:artifacts
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install pyyaml
+
+      - name: Run AI gate
+        run: |
+          python tools/ai_gate_check.py \
+            --task-packet res://ai_library/tasks/current_task.yaml \
+            --memory-log res://ai_library/docs/memory_log.jsonl

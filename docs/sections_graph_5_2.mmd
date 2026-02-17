@@ -1,0 +1,25 @@
+flowchart TD
+  S_5_0["5.0 Asset, UI, and World Pipeline"]
+  class S_5_0 notstarted;
+  S_5_1["5.1 Define visual style and technical standards"]
+  class S_5_1 notstarted;
+  S_5_2["5.2 Character sprite pipeline"]
+  class S_5_2 notstarted;
+  class S_5_2 focus;
+  S_5_3["5.3 Armor and weapon visual pipeline"]
+  class S_5_3 notstarted;
+  S_5_0 --> S_5_1:::hierarchy
+  S_5_0 --> S_5_2:::hierarchy
+  S_5_0 --> S_5_3:::hierarchy
+  S_5_1 -. dep .-> S_5_2:::dependency
+  S_5_2 -. dep .-> S_5_3:::dependency
+  S_5_1 -->|next| S_5_2:::nextptr
+  S_5_2 -->|next| S_5_3:::nextptr
+  classDef complete fill:#1f6f3f,color:#fff,stroke:#14522d,stroke-width:1px;
+  classDef inprogress fill:#1f4f8b,color:#fff,stroke:#163a66,stroke-width:1px;
+  classDef blocked fill:#8b1f2d,color:#fff,stroke:#661621,stroke-width:1px;
+  classDef notstarted fill:#555,color:#fff,stroke:#333,stroke-width:1px;
+  classDef dependency stroke-dasharray: 5 5;
+  classDef nextptr stroke-width:2px;
+  classDef hierarchy stroke-width:1px;
+  classDef focus stroke:#ffd166,stroke-width:3px;

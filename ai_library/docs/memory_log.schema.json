@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Task Memory Log Entry",
+  "type": "object",
+  "required": [
+    "memory_id",
+    "timestamp_utc",
+    "task_id",
+    "feature",
+    "expected_behavior",
+    "actual_behavior",
+    "assumptions",
+    "files_touched",
+    "acceptance_checks",
+    "outcome",
+    "confidence",
+    "confidence_calibrated",
+    "failure_tags",
+    "pattern_ids_used",
+    "contract_ids_touched",
+    "fix_summary",
+    "repair_strategy",
+    "prevention_updates",
+    "time_to_green_minutes",
+    "reusability_score",
+    "engine_version",
+    "agent_role"
+  ],
+  "properties": {
+    "memory_id": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Stable ID for this memory entry, e.g. MEM-M1-T01-001"
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp, e.g. 2026-02-16T20:41:00Z"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Unique task identifier, e.g. M1-T07"
+    },
+    "feature": {
+      "type": "string",
+      "description": "Human-readable feature name"
+    },
+    "agent_role": {
+      "type": "string",
+      "enum": [
+        "planner",
+        "coder",
+        "validator",
+        "integrator",
+        "reflector",
+        "documenter"
+      ]
+    },
+    "engine_version": {
+      "type": "string",
+      "pattern": "^4\\.5(\\..+)?$",
+      "description": "Godot version target"
+    },
+    "expected_behavior": {
+      "type": "string"
+    },
+    "actual_behavior": {
+      "type": "string"
+    },
+    "assumptions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0,
+      "maxItems": 15
+    },
+    "retrieved_references": {
+      "type": "array",
+      "description": "Internal/external sources used during generation",
+      "items": {
+        "type": "object",
+        "required": ["source", "path_or_url", "note"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": ["internal_doc", "internal_code", "godot_docs", "external_repo"]
+          },
+          "path_or_url": { "type": "string" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "files_touched": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 0
+    },
+    "acceptance_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "result"],
+        "properties": {
+          "name": { "type": "string" },
+          "result": { "type": "string", "enum": ["pass", "fail", "not_run"] },
+          "details": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "regression_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "result"],
+        "properties": {
+          "name": { "type": "string" },
+          "result": { "type": "string", "enum": ["pass", "fail", "not_run"] },
+          "details": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["success", "partial", "failed", "rolled_back"]
+    },
+    "failure_tags": {
+      "type": "array",
+      "description": "Use tags from failure_patterns.md",
+      "items": {
+        "type": "string",
+        "enum": [
+          "input_contract_violation",
+          "physics_loop_misuse",
+          "move_and_slide_delta_error",
+          "scene_contract_break",
+          "tight_coupling_parent_chain",
+          "patch_scope_violation",
+          "no_acceptance_gate",
+          "version_drift",
+          "silent_dependency_failure",
+          "regression_unchecked",
+          "performance_regression",
+          "serialization_break",
+          "nondeterministic_behavior",
+          "api_contract_drift",
+          "dependency_version_conflict",
+          "test_flakiness",
+          "content_pipeline_mismatch"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "pattern_ids_used": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Stable IDs of patterns used in the task"
+    },
+    "contract_ids_touched": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Stable IDs of contracts touched by this task"
+    },
+    "root_cause": {
+      "type": "string",
+      "enum": [
+        "wrong_assumption",
+        "missing_contract",
+        "retrieval_miss",
+        "logic_bug",
+        "version_mismatch",
+        "test_gap",
+        "integration_conflict",
+        "unknown"
+      ]
+    },
+    "fix_summary": {
+      "type": "string"
+    },
+    "repair_strategy": {
+      "type": "string"
+    },
+    "prevention_updates": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What was added/changed to prevent recurrence"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "confidence_calibrated": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Post-outcome calibrated confidence"
+    },
+    "reusability_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "time_spent_minutes": {
+      "type": "number",
+      "minimum": 0
+    },
+    "time_to_green_minutes": {
+      "type": "number",
+      "minimum": 0
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

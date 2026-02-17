@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Sections Manifest",
+  "description": "Schema for section roadmap, dependencies, completion rules, and UI behavior.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "project_type",
+    "engine_target",
+    "status_enum",
+    "artifact_types",
+    "completion_policy",
+    "sections",
+    "ui_behavior"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "project_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine_target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status_enum": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "string",
+        "enum": [
+          "not_started",
+          "in_progress",
+          "blocked",
+          "complete",
+          "regression_blocked"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "artifact_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/artifactType" },
+      "uniqueItems": true
+    },
+    "completion_policy": {
+      "type": "object",
+      "required": [
+        "default_rule",
+        "requires_memory_entry",
+        "requires_dependency_completion"
+      ],
+      "properties": {
+        "default_rule": { "type": "string", "minLength": 1 },
+        "requires_memory_entry": { "type": "boolean" },
+        "requires_dependency_completion": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/section" }
+    },
+    "ui_behavior": {
+      "type": "object",
+      "required": [
+        "line_through_on_complete",
+        "confetti_on_complete",
+        "confetti_duration_ms",
+        "toast_on_complete",
+        "auto_select_next_section",
+        "blocked_state_requires_remediation_card"
+      ],
+      "properties": {
+        "line_through_on_complete": { "type": "boolean" },
+        "confetti_on_complete": { "type": "boolean" },
+        "confetti_duration_ms": { "type": "integer", "minimum": 250, "maximum": 20000 },
+        "toast_on_complete": { "type": "boolean" },
+        "auto_select_next_section": { "type": "boolean" },
+        "blocked_state_requires_remediation_card": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "artifactType": {
+      "type": "string",
+      "enum": [
+        "task_packet",
+        "plan_note",
+        "patch_summary",
+        "diff_excerpt",
+        "check_report",
+        "scene_contract_report",
+        "memory_entry",
+        "asset_brief",
+        "tutorial_note",
+        "ui_wireframe",
+        "performance_report",
+        "release_checklist"
+      ]
+    },
+    "checklistItem": {
+      "type": "object",
+      "required": ["id", "text", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.c\\d+$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "in_progress",
+            "pass",
+            "fail",
+            "blocked"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "section": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "level",
+        "parent_id",
+        "status",
+        "goal",
+        "dependencies",
+        "required_artifact_types",
+        "checklist",
+        "completion_message",
+        "next_section_id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "level": {
+          "type": "integer",
+          "enum": [1, 2, 3]
+        },
+        "parent_id": {
+          "anyOf": [
+            { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+            { "type": "null" }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "not_started",
+            "in_progress",
+            "blocked",
+            "complete",
+            "regression_blocked"
+          ]
+        },
+        "goal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dependencies": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+          "uniqueItems": true
+        },
+        "required_artifact_types": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/artifactType" },
+          "uniqueItems": true
+        },
+        "checklist": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/checklistItem" }
+        },
+        "completion_rule": {
+          "type": "string"
+        },
+        "completion_message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "next_section_id": {
+          "anyOf": [
+            { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

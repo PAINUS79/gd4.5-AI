@@ -1,0 +1,30 @@
+version: "1.0"
+pattern_pool:
+  canonical:
+    - pattern_id: "PATTERN-MOVE-2D-AXIS-001"
+      subsystem: "movement"
+      version: "1.0"
+      godot_compat: "4.5"
+      summary: "Use Input.get_axis and CharacterBody2D velocity in _physics_process."
+      usage_examples:
+        - "res://ai_library/systems/movement/player_move_2d.gd"
+      known_failure_tags:
+        - "input_contract_violation"
+        - "physics_loop_misuse"
+        - "move_and_slide_delta_error"
+      tests_covering_pattern:
+        - "TEST-MOVE-LEFT-001"
+        - "TEST-MOVE-RIGHT-001"
+    - pattern_id: "PATTERN-MOVE-2D-JUMP-001"
+      subsystem: "movement"
+      version: "1.0"
+      godot_compat: "4.5"
+      summary: "Apply gravity in _physics_process and trigger jump only from InputMap action."
+      usage_examples:
+        - "res://ai_library/systems/movement/player_move_2d.gd"
+      known_failure_tags:
+        - "nondeterministic_behavior"
+        - "physics_loop_misuse"
+      tests_covering_pattern:
+        - "TEST-JUMP-REG-001"
+  experimental: []

@@ -1,0 +1,77 @@
+{
+  "version": "0.1.0",
+  "track": "quick_win",
+  "sections": [
+    {
+      "id": "0.1",
+      "title": "Validate Setup",
+      "learning_goal": "Confirm project tooling is healthy.",
+      "build_goal": "Run validation and fix obvious setup issues.",
+      "estimated_minutes": 2,
+      "actions": [
+        { "id": "validate", "label": "Run Validate", "command": "manifest_validate" }
+      ],
+      "checks": [
+        { "id": "validate_pass", "type": "exit_code_zero", "source": "manifest_validate" }
+      ],
+      "hints": [
+        "If validate fails, run doctor next.",
+        "Missing files usually indicate scaffold not generated."
+      ],
+      "reward_xp": 50
+    },
+    {
+      "id": "0.2",
+      "title": "Run Project Health Check",
+      "learning_goal": "Understand blockers before building gameplay.",
+      "build_goal": "Run doctor and inspect blockers.",
+      "estimated_minutes": 3,
+      "actions": [
+        { "id": "doctor", "label": "Run Doctor", "command": "manifest_doctor" }
+      ],
+      "checks": [
+        { "id": "doctor_runs", "type": "exit_code_any", "source": "manifest_doctor" }
+      ],
+      "hints": [
+        "Doctor may fail gate while still giving useful diagnostics."
+      ],
+      "reward_xp": 50
+    },
+    {
+      "id": "1.1",
+      "title": "Generate Focused Brief",
+      "learning_goal": "See one clear objective with guidance.",
+      "build_goal": "Create focused onboarding brief for current section.",
+      "estimated_minutes": 3,
+      "actions": [
+        { "id": "brief", "label": "Generate Brief", "command": "brief_focus", "params": { "section_id": "1.1", "depth": 2 } }
+      ],
+      "checks": [
+        { "id": "brief_generated", "type": "file_exists", "path": "docs/brief_focus.md" }
+      ],
+      "hints": [
+        "If generation fails, verify npm scripts and path mappings."
+      ],
+      "reward_xp": 75
+    },
+    {
+      "id": "1.2",
+      "title": "Run CI Gate",
+      "learning_goal": "Learn quality gate behavior.",
+      "build_goal": "Run CI and interpret pass/fail.",
+      "estimated_minutes": 4,
+      "actions": [
+        { "id": "ci", "label": "Run CI", "command": "manifest_ci" },
+        { "id": "bootstrap", "label": "Bootstrap Missing Artifacts", "command": "artifacts_bootstrap" }
+      ],
+      "checks": [
+        { "id": "ci_ran", "type": "exit_code_any", "source": "manifest_ci" }
+      ],
+      "hints": [
+        "Failing CI is normal when artifact coverage is incomplete.",
+        "Use bootstrap for structure; replace with real artifacts later."
+      ],
+      "reward_xp": 100
+    }
+  ]
+}

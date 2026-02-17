@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-02-17T07:44:51Z",
+  "changed": [
+    "package.json"
+  ],
+  "decision": {
+    "should_gate": true,
+    "should_brief": false
+  },
+  "ok": true,
+  "steps": [
+    {
+      "name": "manifest:lint:artifacts",
+      "ok": true,
+      "code": 0,
+      "output": "> ggd4.5-workflow@1.0.0 manifest:lint:artifacts\n> tsx src/cli/lint_artifacts_manifest.ts\n\n\u00e2\u0153\u2026 Artifacts manifest is valid.\nSchema: C:\\Users\\penus\\ggd4.5\\schemas\\artifacts_manifest.schema.json\nManifest: C:\\Users\\penus\\ggd4.5\\src\\data\\artifacts_manifest.json"
+    },
+    {
+      "name": "ai_gate_check",
+      "ok": true,
+      "code": 0,
+      "output": "[AI-GATE][PASS] Loaded task packet: C:\\Users\\penus\\ggd4.5\\ai_library\\tasks\\current_task.yaml\n[AI-GATE][PASS] Task ID: M1-T02\n[AI-GATE][PASS] Task packet contains assumptions and acceptance checks.\n[AI-GATE][PASS] Loaded memory log entries: 2\n[AI-GATE][PASS] Memory log entry exists and passes required field checks.\n[AI-GATE][PASS] AI gate passed."
+    },
+    {
+      "name": "manifest:brief:full:artifacts",
+      "ok": true,
+      "code": 0,
+      "output": "> ggd4.5-workflow@1.0.0 manifest:brief:full:artifacts\n> tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json docs/brief_full.md --format markdown --with-artifacts src/data/artifacts_manifest.json\n\n\u00e2\u0153\u2026 Markdown brief written: C:\\Users\\penus\\ggd4.5\\docs\\brief_full.md"
+    }
+  ]
+}

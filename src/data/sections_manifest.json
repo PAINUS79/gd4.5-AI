@@ -1,0 +1,899 @@
+{
+  "manifest_version": "1.0.0",
+  "project_type": "2d_topdown_shooter_action_rpg",
+  "engine_target": "godot_4.5",
+  "status_enum": [
+    "not_started",
+    "in_progress",
+    "blocked",
+    "complete",
+    "regression_blocked"
+  ],
+  "artifact_types": [
+    "task_packet",
+    "plan_note",
+    "patch_summary",
+    "diff_excerpt",
+    "check_report",
+    "scene_contract_report",
+    "memory_entry",
+    "asset_brief",
+    "tutorial_note",
+    "ui_wireframe",
+    "performance_report",
+    "release_checklist"
+  ],
+  "completion_policy": {
+    "default_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+    "requires_memory_entry": true,
+    "requires_dependency_completion": true
+  },
+  "sections": [
+    {
+      "id": "1.0",
+      "title": "Foundation & Workflow",
+      "level": 1,
+      "parent_id": null,
+      "status": "not_started",
+      "goal": "Establish project structure, AI workflow rules, and dual-pane tracking shell.",
+      "dependencies": [],
+      "required_artifact_types": [
+        "task_packet",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "1.0.c1", "text": "All 1.x subsections complete", "status": "not_started"}
+      ],
+      "completion_rule": "all_children_complete",
+      "completion_message": "🎉 Congratulations on completing section 1.0 Foundation & Workflow!",
+      "next_section_id": "2.0"
+    },
+    {
+      "id": "1.1",
+      "title": "Create project and folder architecture",
+      "level": 2,
+      "parent_id": "1.0",
+      "status": "not_started",
+      "goal": "Create a clean, scalable folder layout and baseline docs.",
+      "dependencies": [],
+      "required_artifact_types": [
+        "task_packet",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "1.1.c1", "text": "Project created in Godot 4.5", "status": "not_started"},
+        {"id": "1.1.c2", "text": "Required folders created", "status": "not_started"},
+        {"id": "1.1.c3", "text": "Base docs added (style/api/scene/failure)", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 1.1!",
+      "next_section_id": "1.2"
+    },
+    {
+      "id": "1.2",
+      "title": "Configure InputMap and control standards",
+      "level": 2,
+      "parent_id": "1.0",
+      "status": "not_started",
+      "goal": "Define action-based input controls for keyboard/controller.",
+      "dependencies": ["1.1"],
+      "required_artifact_types": [
+        "task_packet",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "1.2.c1", "text": "Actions added: movement/attack/interact/dash/pause", "status": "not_started"},
+        {"id": "1.2.c2", "text": "Default bindings configured", "status": "not_started"},
+        {"id": "1.2.c3", "text": "Input contract documented", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 1.2!",
+      "next_section_id": "1.3"
+    },
+    {
+      "id": "1.3",
+      "title": "Initialize AI workflow docs and gate scripts",
+      "level": 2,
+      "parent_id": "1.0",
+      "status": "not_started",
+      "goal": "Install task/memory/check gate infrastructure.",
+      "dependencies": ["1.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "1.3.c1", "text": "Task packet template added", "status": "not_started"},
+        {"id": "1.3.c2", "text": "Memory schema and log initialized", "status": "not_started"},
+        {"id": "1.3.c3", "text": "Pre-commit/CI gate installed", "status": "not_started"},
+        {"id": "1.3.c4", "text": "Gate fails intentionally bad packet and passes valid packet", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 1.3!",
+      "next_section_id": "1.4"
+    },
+    {
+      "id": "1.4",
+      "title": "Configure dual-pane UI shell",
+      "level": 2,
+      "parent_id": "1.0",
+      "status": "not_started",
+      "goal": "Build left chat pane and right section/artifact pane.",
+      "dependencies": ["1.3"],
+      "required_artifact_types": [
+        "task_packet",
+        "ui_wireframe",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "1.4.c1", "text": "Left pane chat shell renders", "status": "not_started"},
+        {"id": "1.4.c2", "text": "Right pane section tree renders", "status": "not_started"},
+        {"id": "1.4.c3", "text": "Artifact inspect drawer works", "status": "not_started"},
+        {"id": "1.4.c4", "text": "Selecting section scopes chat context", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 1.4!",
+      "next_section_id": "2.0"
+    },
+    {
+      "id": "2.0",
+      "title": "Core Shooter Template",
+      "level": 1,
+      "parent_id": null,
+      "status": "not_started",
+      "goal": "Build a playable top-down shooter loop with UI.",
+      "dependencies": ["1.0"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "2.0.c1", "text": "All 2.x subsections complete", "status": "not_started"},
+        {"id": "2.0.c2", "text": "One-minute playable loop passes", "status": "not_started"}
+      ],
+      "completion_rule": "all_children_complete && integration_verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.0 Core Shooter!",
+      "next_section_id": "3.0"
+    },
+    {
+      "id": "2.1",
+      "title": "Create Main scene and canonical node tree",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Establish standard node hierarchy for systems and gameplay.",
+      "dependencies": ["1.4"],
+      "required_artifact_types": [
+        "task_packet",
+        "scene_contract_report",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "2.1.c1", "text": "Main scene contains required top-level nodes", "status": "not_started"},
+        {"id": "2.1.c2", "text": "Scene contract documentation updated", "status": "not_started"},
+        {"id": "2.1.c3", "text": "Scene loads without runtime errors", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.1!",
+      "next_section_id": "2.2"
+    },
+    {
+      "id": "2.2",
+      "title": "Implement player movement (8-direction top-down)",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Implement stable 8-direction movement with proper physics loop.",
+      "dependencies": ["2.1", "1.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "2.2.c1", "text": "Player moves in 8 directions", "status": "not_started"},
+        {"id": "2.2.c2", "text": "Movement logic runs in _physics_process", "status": "not_started"},
+        {"id": "2.2.c3", "text": "No raw keycode usage", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.2!",
+      "next_section_id": "2.3"
+    },
+    {
+      "id": "2.3",
+      "title": "Implement camera follow",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Attach smooth and readable camera behavior.",
+      "dependencies": ["2.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "2.3.c1", "text": "Camera follows player", "status": "not_started"},
+        {"id": "2.3.c2", "text": "No jitter under normal movement", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.3!",
+      "next_section_id": "2.4"
+    },
+    {
+      "id": "2.4",
+      "title": "Implement basic shooting",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Player can fire projectile with cooldown.",
+      "dependencies": ["2.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "2.4.c1", "text": "Projectile spawns and travels correctly", "status": "not_started"},
+        {"id": "2.4.c2", "text": "Cooldown enforced", "status": "not_started"},
+        {"id": "2.4.c3", "text": "No null-target crashes", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.4!",
+      "next_section_id": "2.5"
+    },
+    {
+      "id": "2.5",
+      "title": "Enemy basic AI + health/death",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Add first enemy loop with damage and death events.",
+      "dependencies": ["2.4"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "2.5.c1", "text": "Enemy chases or engages player", "status": "not_started"},
+        {"id": "2.5.c2", "text": "Enemy takes damage", "status": "not_started"},
+        {"id": "2.5.c3", "text": "Enemy death emits expected event", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.5!",
+      "next_section_id": "2.6"
+    },
+    {
+      "id": "2.6",
+      "title": "HUD (health and combat indicators)",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Display health and core combat state to player.",
+      "dependencies": ["2.5"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry",
+        "ui_wireframe"
+      ],
+      "checklist": [
+        {"id": "2.6.c1", "text": "Health display updates correctly", "status": "not_started"},
+        {"id": "2.6.c2", "text": "Combat indicator updates correctly", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.6!",
+      "next_section_id": "2.7"
+    },
+    {
+      "id": "2.7",
+      "title": "Section 2 integration validation",
+      "level": 2,
+      "parent_id": "2.0",
+      "status": "not_started",
+      "goal": "Validate one-minute playable shooter loop.",
+      "dependencies": ["2.6"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "2.7.c1", "text": "Startup sanity check passes", "status": "not_started"},
+        {"id": "2.7.c2", "text": "Movement/combat/UI acceptance checks pass", "status": "not_started"},
+        {"id": "2.7.c3", "text": "Regression checks pass", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 2.7!",
+      "next_section_id": "3.0"
+    },
+    {
+      "id": "3.0",
+      "title": "Action RPG Layer",
+      "level": 1,
+      "parent_id": null,
+      "status": "not_started",
+      "goal": "Add NPC interaction, quests, inventory, and persistence basics.",
+      "dependencies": ["2.0"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "3.0.c1", "text": "All 3.x subsections complete", "status": "not_started"},
+        {"id": "3.0.c2", "text": "One full quest loop passes", "status": "not_started"}
+      ],
+      "completion_rule": "all_children_complete && integration_verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.0 Action RPG Layer!",
+      "next_section_id": "4.0"
+    },
+    {
+      "id": "3.1",
+      "title": "NPC interaction framework",
+      "level": 2,
+      "parent_id": "3.0",
+      "status": "not_started",
+      "goal": "Enable player interaction with NPCs using contracts/events.",
+      "dependencies": ["2.7"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "3.1.c1", "text": "Interact prompt appears in range", "status": "not_started"},
+        {"id": "3.1.c2", "text": "Interaction event fires reliably", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.1!",
+      "next_section_id": "3.2"
+    },
+    {
+      "id": "3.2",
+      "title": "Dialogue data structure",
+      "level": 2,
+      "parent_id": "3.0",
+      "status": "not_started",
+      "goal": "Create data-driven dialogue pipeline for NPC text.",
+      "dependencies": ["3.1"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "3.2.c1", "text": "Dialogue schema implemented", "status": "not_started"},
+        {"id": "3.2.c2", "text": "Single NPC conversation plays correctly", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.2!",
+      "next_section_id": "3.3"
+    },
+    {
+      "id": "3.3",
+      "title": "Quest state machine",
+      "level": 2,
+      "parent_id": "3.0",
+      "status": "not_started",
+      "goal": "Implement quest lifecycle and event-based progression.",
+      "dependencies": ["3.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "3.3.c1", "text": "States implemented (locked/active/completed/turned_in)", "status": "not_started"},
+        {"id": "3.3.c2", "text": "Quest updates from gameplay events", "status": "not_started"},
+        {"id": "3.3.c3", "text": "Quest log updates", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.3!",
+      "next_section_id": "3.4"
+    },
+    {
+      "id": "3.4",
+      "title": "Loot and inventory basic",
+      "level": 2,
+      "parent_id": "3.0",
+      "status": "not_started",
+      "goal": "Add item pickup and basic inventory storage.",
+      "dependencies": ["3.3"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "3.4.c1", "text": "Item schema defined", "status": "not_started"},
+        {"id": "3.4.c2", "text": "Pickups add to inventory", "status": "not_started"},
+        {"id": "3.4.c3", "text": "Stack behavior works", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.4!",
+      "next_section_id": "3.5"
+    },
+    {
+      "id": "3.5",
+      "title": "Save/load checkpoint v1",
+      "level": 2,
+      "parent_id": "3.0",
+      "status": "not_started",
+      "goal": "Persist core player, quest, and inventory state.",
+      "dependencies": ["3.4"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "3.5.c1", "text": "Player state serializes and loads", "status": "not_started"},
+        {"id": "3.5.c2", "text": "Quest states persist", "status": "not_started"},
+        {"id": "3.5.c3", "text": "Inventory persists", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.5!",
+      "next_section_id": "3.6"
+    },
+    {
+      "id": "3.6",
+      "title": "Section 3 integration validation",
+      "level": 2,
+      "parent_id": "3.0",
+      "status": "not_started",
+      "goal": "Validate complete quest loop from accept to turn-in.",
+      "dependencies": ["3.5"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "3.6.c1", "text": "NPC interaction works", "status": "not_started"},
+        {"id": "3.6.c2", "text": "Quest progression works", "status": "not_started"},
+        {"id": "3.6.c3", "text": "Save/load retains quest progress", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 3.6!",
+      "next_section_id": "4.0"
+    },
+    {
+      "id": "4.0",
+      "title": "Dungeon Crawler Layer",
+      "level": 1,
+      "parent_id": null,
+      "status": "not_started",
+      "goal": "Create repeatable dungeon room progression with rewards.",
+      "dependencies": ["3.0"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "4.0.c1", "text": "All 4.x subsections complete", "status": "not_started"},
+        {"id": "4.0.c2", "text": "Complete one dungeon run successfully", "status": "not_started"}
+      ],
+      "completion_rule": "all_children_complete && integration_verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 4.0 Dungeon Layer!",
+      "next_section_id": "5.0"
+    },
+    {
+      "id": "4.1",
+      "title": "Room state model",
+      "level": 2,
+      "parent_id": "4.0",
+      "status": "not_started",
+      "goal": "Implement deterministic room lifecycle states.",
+      "dependencies": ["3.6"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "4.1.c1", "text": "Room state transitions implemented", "status": "not_started"},
+        {"id": "4.1.c2", "text": "Enter trigger activates room", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 4.1!",
+      "next_section_id": "4.2"
+    },
+    {
+      "id": "4.2",
+      "title": "Spawn wave director",
+      "level": 2,
+      "parent_id": "4.0",
+      "status": "not_started",
+      "goal": "Spawn and track encounter waves per room.",
+      "dependencies": ["4.1"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "4.2.c1", "text": "Wave configs load", "status": "not_started"},
+        {"id": "4.2.c2", "text": "Enemies spawn at valid points", "status": "not_started"},
+        {"id": "4.2.c3", "text": "Alive enemy count tracks correctly", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 4.2!",
+      "next_section_id": "4.3"
+    },
+    {
+      "id": "4.3",
+      "title": "Clear-room gates and transitions",
+      "level": 2,
+      "parent_id": "4.0",
+      "status": "not_started",
+      "goal": "Unlock transitions and reward events after room clear.",
+      "dependencies": ["4.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "4.3.c1", "text": "Room clear detection works", "status": "not_started"},
+        {"id": "4.3.c2", "text": "Gate unlocks correctly", "status": "not_started"},
+        {"id": "4.3.c3", "text": "Reward trigger fires", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 4.3!",
+      "next_section_id": "4.4"
+    },
+    {
+      "id": "4.4",
+      "title": "Dungeon run completion",
+      "level": 2,
+      "parent_id": "4.0",
+      "status": "not_started",
+      "goal": "Finalize run completion and checkpoint behavior.",
+      "dependencies": ["4.3"],
+      "required_artifact_types": [
+        "task_packet",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "4.4.c1", "text": "Run completion event works", "status": "not_started"},
+        {"id": "4.4.c2", "text": "Checkpoint/save written on completion", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 4.4!",
+      "next_section_id": "4.5"
+    },
+    {
+      "id": "4.5",
+      "title": "Section 4 integration validation",
+      "level": 2,
+      "parent_id": "4.0",
+      "status": "not_started",
+      "goal": "Validate full dungeon loop from entry to reward.",
+      "dependencies": ["4.4"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "4.5.c1", "text": "Dungeon progression is valid", "status": "not_started"},
+        {"id": "4.5.c2", "text": "No softlocks in tested paths", "status": "not_started"},
+        {"id": "4.5.c3", "text": "Reward/checkpoint integration passes", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 4.5!",
+      "next_section_id": "5.0"
+    },
+    {
+      "id": "5.0",
+      "title": "Asset, UI, and World Pipeline",
+      "level": 1,
+      "parent_id": null,
+      "status": "not_started",
+      "goal": "Guide users through asset acquisition, integration, and world setup.",
+      "dependencies": ["4.0"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry",
+        "asset_brief"
+      ],
+      "checklist": [
+        {"id": "5.0.c1", "text": "All 5.x subsections complete", "status": "not_started"},
+        {"id": "5.0.c2", "text": "Placeholder assets replaced with production-ready set", "status": "not_started"}
+      ],
+      "completion_rule": "all_children_complete && integration_verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.0 Asset/UI/World Pipeline!",
+      "next_section_id": "6.0"
+    },
+    {
+      "id": "5.1",
+      "title": "Define visual style and technical standards",
+      "level": 2,
+      "parent_id": "5.0",
+      "status": "not_started",
+      "goal": "Set visual direction and hard asset specs.",
+      "dependencies": ["4.5"],
+      "required_artifact_types": [
+        "task_packet",
+        "asset_brief",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "5.1.c1", "text": "Style target selected", "status": "not_started"},
+        {"id": "5.1.c2", "text": "Technical asset standards documented", "status": "not_started"},
+        {"id": "5.1.c3", "text": "Naming convention finalized", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.1!",
+      "next_section_id": "5.2"
+    },
+    {
+      "id": "5.2",
+      "title": "Character sprite pipeline",
+      "level": 2,
+      "parent_id": "5.0",
+      "status": "not_started",
+      "goal": "Import character animations and integrate with gameplay.",
+      "dependencies": ["5.1"],
+      "required_artifact_types": [
+        "task_packet",
+        "asset_brief",
+        "patch_summary",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "5.2.c1", "text": "Required animation set acquired", "status": "not_started"},
+        {"id": "5.2.c2", "text": "Sprites imported with correct settings", "status": "not_started"},
+        {"id": "5.2.c3", "text": "Animations wired and playable", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.2!",
+      "next_section_id": "5.3"
+    },
+    {
+      "id": "5.3",
+      "title": "Armor and weapon visual pipeline",
+      "level": 2,
+      "parent_id": "5.0",
+      "status": "not_started",
+      "goal": "Integrate equip visuals and attack effects.",
+      "dependencies": ["5.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "asset_brief",
+        "patch_summary",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "5.3.c1", "text": "Equipment visual strategy chosen (layered/precomposed)", "status": "not_started"},
+        {"id": "5.3.c2", "text": "Weapon visuals integrated", "status": "not_started"},
+        {"id": "5.3.c3", "text": "Attack FX integrated and readable", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.3!",
+      "next_section_id": "5.4"
+    },
+    {
+      "id": "5.4",
+      "title": "UI graphics pipeline",
+      "level": 2,
+      "parent_id": "5.0",
+      "status": "not_started",
+      "goal": "Replace placeholder UI with consistent production UI assets.",
+      "dependencies": ["5.3"],
+      "required_artifact_types": [
+        "task_packet",
+        "asset_brief",
+        "ui_wireframe",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "5.4.c1", "text": "Icon atlas imported and mapped", "status": "not_started"},
+        {"id": "5.4.c2", "text": "Typography/spacing tokens applied", "status": "not_started"},
+        {"id": "5.4.c3", "text": "HUD/inventory readability checks pass", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.4!",
+      "next_section_id": "5.5"
+    },
+    {
+      "id": "5.5",
+      "title": "Terrain tileset and world generation setup",
+      "level": 2,
+      "parent_id": "5.0",
+      "status": "not_started",
+      "goal": "Build traversable, readable world with tile rules and controlled generation.",
+      "dependencies": ["5.4"],
+      "required_artifact_types": [
+        "task_packet",
+        "asset_brief",
+        "patch_summary",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "5.5.c1", "text": "Tileset and collision layers configured", "status": "not_started"},
+        {"id": "5.5.c2", "text": "Biome/theme rules documented", "status": "not_started"},
+        {"id": "5.5.c3", "text": "Traversal validation passes", "status": "not_started"},
+        {"id": "5.5.c4", "text": "Spawn and loot placement rules active", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.5!",
+      "next_section_id": "5.6"
+    },
+    {
+      "id": "5.6",
+      "title": "Section 5 integration validation",
+      "level": 2,
+      "parent_id": "5.0",
+      "status": "not_started",
+      "goal": "Validate complete visual/world pipeline integration.",
+      "dependencies": ["5.5"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "5.6.c1", "text": "Style consistency checks pass", "status": "not_started"},
+        {"id": "5.6.c2", "text": "Asset integration has no missing links", "status": "not_started"},
+        {"id": "5.6.c3", "text": "World readability/playability checks pass", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 5.6!",
+      "next_section_id": "6.0"
+    },
+    {
+      "id": "6.0",
+      "title": "Polish, Balance, and Release Prep",
+      "level": 1,
+      "parent_id": null,
+      "status": "not_started",
+      "goal": "Stabilize gameplay, improve UX, and prepare MVP release.",
+      "dependencies": ["5.0"],
+      "required_artifact_types": [
+        "check_report",
+        "memory_entry",
+        "performance_report",
+        "release_checklist"
+      ],
+      "checklist": [
+        {"id": "6.0.c1", "text": "All 6.x subsections complete", "status": "not_started"},
+        {"id": "6.0.c2", "text": "Release candidate build validated", "status": "not_started"}
+      ],
+      "completion_rule": "all_children_complete && release_gate_pass",
+      "completion_message": "🎉 Congratulations on completing section 6.0! MVP release workflow complete.",
+      "next_section_id": null
+    },
+    {
+      "id": "6.1",
+      "title": "Difficulty and progression tuning",
+      "level": 2,
+      "parent_id": "6.0",
+      "status": "not_started",
+      "goal": "Tune combat, rewards, and pacing.",
+      "dependencies": ["5.6"],
+      "required_artifact_types": [
+        "task_packet",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "6.1.c1", "text": "Enemy tuning pass complete", "status": "not_started"},
+        {"id": "6.1.c2", "text": "Reward economy tuning pass complete", "status": "not_started"},
+        {"id": "6.1.c3", "text": "Early-game progression feels coherent", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 6.1!",
+      "next_section_id": "6.2"
+    },
+    {
+      "id": "6.2",
+      "title": "Performance pass",
+      "level": 2,
+      "parent_id": "6.0",
+      "status": "not_started",
+      "goal": "Eliminate major frame spikes and optimize key systems.",
+      "dependencies": ["6.1"],
+      "required_artifact_types": [
+        "task_packet",
+        "performance_report",
+        "check_report",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "6.2.c1", "text": "Hotspots identified and documented", "status": "not_started"},
+        {"id": "6.2.c2", "text": "High-impact optimizations applied", "status": "not_started"},
+        {"id": "6.2.c3", "text": "Performance acceptance threshold passes", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 6.2!",
+      "next_section_id": "6.3"
+    },
+    {
+      "id": "6.3",
+      "title": "UX and onboarding pass",
+      "level": 2,
+      "parent_id": "6.0",
+      "status": "not_started",
+      "goal": "Ensure beginner players understand objectives quickly.",
+      "dependencies": ["6.2"],
+      "required_artifact_types": [
+        "task_packet",
+        "ui_wireframe",
+        "check_report",
+        "memory_entry",
+        "tutorial_note"
+      ],
+      "checklist": [
+        {"id": "6.3.c1", "text": "Tutorial prompts integrated", "status": "not_started"},
+        {"id": "6.3.c2", "text": "Objective visibility improved", "status": "not_started"},
+        {"id": "6.3.c3", "text": "First-2-minute usability checks pass", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉 Congratulations on completing section 6.3!",
+      "next_section_id": "6.4"
+    },
+    {
+      "id": "6.4",
+      "title": "Regression freeze and release checklist",
+      "level": 2,
+      "parent_id": "6.0",
+      "status": "not_started",
+      "goal": "Run full regression, resolve blockers, and produce release candidate.",
+      "dependencies": ["6.3"],
+      "required_artifact_types": [
+        "check_report",
+        "release_checklist",
+        "memory_entry"
+      ],
+      "checklist": [
+        {"id": "6.4.c1", "text": "Full regression suite passes", "status": "not_started"},
+        {"id": "6.4.c2", "text": "No open critical blockers", "status": "not_started"},
+        {"id": "6.4.c3", "text": "Release candidate tagged", "status": "not_started"}
+      ],
+      "completion_rule": "all_checklist_pass && required_artifacts_present && verify_pass",
+      "completion_message": "🎉🎉 Congratulations on completing section 6.4 — MVP READY! 🎉🎉",
+      "next_section_id": null
+    }
+  ],
+  "ui_behavior": {
+    "line_through_on_complete": true,
+    "confetti_on_complete": true,
+    "confetti_duration_ms": 2600,
+    "toast_on_complete": true,
+    "auto_select_next_section": true,
+    "blocked_state_requires_remediation_card": true
+  }
+}

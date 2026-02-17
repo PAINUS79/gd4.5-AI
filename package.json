@@ -1,0 +1,38 @@
+{
+  "name": "ggd4.5-workflow",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test:state": "vitest run src/state/section_state_machine.test.ts",
+    "test:state:watch": "vitest src/state/section_state_machine.test.ts",
+    "manifest:validate": "tsx src/cli/manifest_cli.ts validate src/data/sections_manifest.json",
+    "manifest:topo": "tsx src/cli/manifest_cli.ts topo src/data/sections_manifest.json",
+    "manifest:blockers": "tsx src/cli/manifest_cli.ts list-blockers src/data/sections_manifest.json 3.3",
+    "manifest:next": "tsx src/cli/manifest_cli.ts next src/data/sections_manifest.json 3.3",
+    "manifest:doctor": "tsx src/cli/manifest_cli.ts doctor src/data/sections_manifest.json",
+    "manifest:graph": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json docs/sections_graph.mmd",
+    "manifest:graph:focus": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json --output docs/sections_focus.mmd --focus 3.0 --depth 2",
+    "manifest:brief:full": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json docs/brief_full.md --format markdown",
+    "manifest:brief:focus": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json --output docs/brief_focus.md --format markdown --focus 3.0 --depth 2",
+    "manifest:brief:focus:artifacts": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json --output docs/brief_focus.md --format markdown --focus 3.0 --depth 2 --with-artifacts src/data/artifacts_manifest.json",
+    "manifest:brief:custom": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json --format markdown",
+    "manifest:graph:custom": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json",
+    "artifacts:bootstrap": "python tools/bootstrap_artifacts.py",
+    "wrappers:check": "python tools/check_wrappers.py",
+    "manifest:brief:full:artifacts": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json docs/brief_full.md --format markdown --with-artifacts src/data/artifacts_manifest.json",
+    "manifest:ci": "tsx src/cli/manifest_cli.ts export-mermaid src/data/sections_manifest.json --output docs/brief_ci.md --format markdown --with-artifacts src/data/artifacts_manifest.json --ci --ci-threshold 100 --ci-json docs/ci_gate.json",
+    "manifest:lint:artifacts": "tsx src/cli/lint_artifacts_manifest.ts",
+    "gate:all": "npm run manifest:lint:artifacts && python tools/ai_gate_check.py --task-packet res://ai_library/tasks/current_task.yaml --memory-log res://ai_library/docs/memory_log.jsonl",
+    "pipeline:daemon": "python tools/ai_pipeline_daemon.py",
+    "pipeline:daemon:focus:3.0": "python tools/ai_pipeline_daemon.py --focus 3.0",
+    "pipeline:daemon:once": "python tools/ai_pipeline_daemon.py --once"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.0"
+  }
+}

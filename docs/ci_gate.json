@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-02-17T07:30:40.251Z",
+  "focus": null,
+  "depth": 2,
+  "format": "markdown",
+  "threshold": 100,
+  "strict_warning": false,
+  "warning": null,
+  "audit_summary": {
+    "included_sections": 38,
+    "all_required_final": 38,
+    "missing_required_total": 0,
+    "final_artifacts_total": 146
+  },
+  "failing_sections": [],
+  "pass": true,
+  "reasons": []
+}

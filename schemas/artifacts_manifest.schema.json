@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Artifacts Manifest",
+  "description": "Schema for section-linked artifacts in the dual-pane AI workflow.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "project_id",
+    "artifact_types",
+    "artifacts"
+  ],
+  "properties": {
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "task_packet",
+          "plan_note",
+          "patch_summary",
+          "diff_excerpt",
+          "check_report",
+          "scene_contract_report",
+          "memory_entry",
+          "asset_brief",
+          "tutorial_note",
+          "ui_wireframe",
+          "performance_report",
+          "release_checklist"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "project_id",
+        "section_id",
+        "task_id",
+        "producer_agent",
+        "artifact_type",
+        "title",
+        "created_at",
+        "status"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9._:-]{3,128}$"
+        },
+        "project_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section_id": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        },
+        "task_id": {
+          "type": "string",
+          "minLength": 2
+        },
+        "producer_agent": {
+          "type": "string",
+          "enum": [
+            "planner",
+            "implementer",
+            "verifier",
+            "reviewer",
+            "reflector",
+            "mentor",
+            "integrator"
+          ]
+        },
+        "artifact_type": {
+          "type": "string",
+          "enum": [
+            "task_packet",
+            "plan_note",
+            "patch_summary",
+            "diff_excerpt",
+            "check_report",
+            "scene_contract_report",
+            "memory_entry",
+            "asset_brief",
+            "tutorial_note",
+            "ui_wireframe",
+            "performance_report",
+            "release_checklist"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "final",
+            "failed",
+            "superseded"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "inspect_uri": {
+          "type": "string",
+          "description": "URI to load detailed artifact content."
+        },
+        "inspect_payload": {
+          "type": "object",
+          "description": "Inline content for inspection if no URI is used.",
+          "additionalProperties": true
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "related_artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._:-]{3,128}$"
+          },
+          "uniqueItems": true
+        },
+        "verification": {
+          "type": "object",
+          "required": ["verify_pass"],
+          "properties": {
+            "verify_pass": { "type": "boolean" },
+            "check_count": { "type": "integer", "minimum": 0 },
+            "failed_checks": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "meta": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "oneOf": [
+        {
+          "required": ["inspect_uri"]
+        },
+        {
+          "required": ["inspect_payload"]
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}
